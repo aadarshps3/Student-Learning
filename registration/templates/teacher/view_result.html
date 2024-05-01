@@ -1,0 +1,61 @@
+{% extends 'teacher/base.html' %}
+
+{% block content %}
+
+<div class="container page__heading-container">
+    <div class="page__heading d-flex align-items-center justify-content-between">
+        <h1 class="m-0"> Results </h1>
+    </div>
+</div>
+
+<div class="card card-form">
+    <div class="row no-gutters">
+
+        <div class="col-lg-12 card-form__body">
+
+            <div class="table-responsive border-bottom" data-toggle="lists"
+                 data-lists-values="[&quot;js-lists-values-employee-name&quot;]">
+
+
+                <table class="table mb-0 thead-border-top-0">
+                    <thead>
+                    <tr>
+                        <th>SI No</th>
+                        <th>Subject</th>
+                        <th>Roll No</th>
+                        <th>Name</th>
+                        <th>Total Marks</th>
+                        <th>Percentage</th>
+                        <th>Result</th>
+
+
+                    </tr>
+                    </thead>
+                    {% for i in results %}
+                    <tbody>
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.subject}}</td>
+                        <td>{{i.student.rollno}}</td>
+                        <td>{{i.student.first_name}}</td>
+
+
+                        <td>{{i.total_marks}}/{{i.get_total_question}}</td>
+                        <td>{{i.get_percentage}}</td>
+                        <td>{% if i.get_percentage >= 40.0 %}
+                            Pass{% else %}
+                            Failed{% endif %}
+                        </td>
+
+
+                    </tr>
+
+                    </tbody>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

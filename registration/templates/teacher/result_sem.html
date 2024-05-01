@@ -1,0 +1,16 @@
+
+{% extends 'teacher/base.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+
+  <div class="col-6">
+ <h2> <strong>SELECT A SEMESTER</strong></h2>
+<br><br>
+
+
+   {% for i in data %}
+   <a href="{% url 'subject_list' i.id  %}" class="btn btn-block btn-md btn-info waves-effect waves-light"><h2 s>{{ i.semester_name }}</h2>  </a>
+{% endfor %}
+
+</div>
+{% endblock  %}

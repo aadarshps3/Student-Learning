@@ -1,0 +1,41 @@
+{% extends 'teacher/base.html' %}
+{% load crispy_forms_filters  %}
+{% block content %}
+
+<div class="container page__heading-container">
+    <div class="page__heading d-flex align-items-center justify-content-between">
+        <h1 class="m-0">Add Videos</h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-8">
+        {% for message in messages %}
+        <div class="alert alert-info" role="alert">
+            {{message}}
+        </div>
+        {% endfor %}
+        <div class="card">
+            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="card-form__body card-body">
+
+                    <div class="form-group">
+                        {{form|crispy}}
+
+                    </div>
+
+
+                </div>
+                <div class="card-body text-center">
+
+                    <button type="submit" class="btn btn-success">SUBMIT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

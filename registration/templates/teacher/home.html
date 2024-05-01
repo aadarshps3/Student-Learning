@@ -1,0 +1,26 @@
+{% extends 'teacher/base.html' %}
+
+{% block content %}
+
+<div class="col-md-10">
+    <div class="card widget-box-one border border-danger bg-soft-danger" style="height:400px; ">
+        <div class="card-body">
+            <div class="float-right avatar-lg rounded-circle mt-3">
+
+            </div>
+            <div class="wigdet-one-content">
+                <p class="m-0 text-uppercase font-weight-bold text-muted" title="Statistics">
+                    Welcome</p>
+                <h2>{{request.user}}</h2>
+                <marquee bgcolor="white" scrollamount="15"><h4><b>Name:{{request.user.first_name}}________Designation:Teacher________Course
+                   :{{request.user.course}}</b></h4></marquee>
+
+                <hr>
+
+                <br><br><br>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

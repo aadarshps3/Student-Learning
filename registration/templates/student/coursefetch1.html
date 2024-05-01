@@ -1,0 +1,155 @@
+{% extends 'student/base.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+<div class="col-lg-12">
+    {% for message in messages %}
+   <div class="alert alert-danger" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+
+    <div class="card">
+        <div class="float-right"></div>
+        <div class="card-header bg-info">
+
+            <h3 class="card-title text-white mb-0">
+
+
+                FIRST INTERNAL EXAMINATION OF {{course}}</h3> <br>
+            <h5 style="color:white">DURATION {{duration}}Hrs
+                <div class="float-right">Time Left:<h5 id="demo"></h5></div>
+            </h5>
+
+
+        </div>
+
+
+        <form method="post">{% csrf_token %}
+            <div class="card-body">
+                <p class="mb-0">
+                    {% for qn in questions %}
+                <div class="panel-body"><strong></strong><h4><b>{{ forloop.counter0|add:questions.start_index }}.
+                    {{qn.question}}</b></h4>(maximum
+                    marks:1)
+                </div>
+                <br><br>
+
+
+                <div class="panel-heading">
+
+                    <strong></strong><br>
+
+                    <input type="radio" id="option1" name="answer" value="option1" required>
+                    <label for="option1">{{qn.question.option1}}</label><br>
+
+                    <input type="radio" id="option2" name="answer"
+                           value="option2" required>
+                    <label for="option2">{{qn.question.option2}}</label><br>
+
+                    <input type="radio" id="option3" name="answer"
+                           value="option3" required>
+                    <label for="option3">{{qn.question.option3}}</label><br>
+
+                    <input type="radio" id="option4" name="answer"
+                           value="option4" required>
+                    <label for="option4">{{qn.question.option4}}</label><br>
+
+                    <input hidden value="{{qn.question.id}}" name="qstn">
+
+                    <br><br>
+
+                    {% endfor %}
+
+
+                </div>
+
+
+                <div class="float-right">
+                    {% if questions.has_other_pages %}
+                    <ul class="pagination pagination-lg mb-0">
+                        {% if questions.has_previous %}
+                        <li class="page-item">
+                            <a href="?page={{ questions.previous_page_number }}" class="page-link"><i
+                                    class="fa fa-angle-left"></i></a>
+                        </li>
+                        {% else %}
+                        <li class="disabled page-item">
+                            <a href="#" class="page-link"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                        {% endif %}
+                        <!--                        {% for i in questions.paginator.page_range %}-->
+                        <!--                        {% if questions.number == i %}-->
+                        <!--                        <li class="page-item active">-->
+                        <!--                            <a href="?page={{ i }}" class="page-link">{{ i }}</a>-->
+                        <!--                        </li>-->
+                        <!--                        {% else %}-->
+                        <!--                        <li class=" page-item">-->
+                        <!--                            <a href="?page={{ i }}" class="page-link">{{ i }}</a>-->
+                        <!--                        </li>-->
+                        <!--                        {% endif %}-->
+                        <!--                        {% endfor %}-->
+
+                        {% if questions.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ questions.next_page_number }}" class="page-link"><i
+                                    class="fa fa-angle-right"></i></a>
+                        </li>
+                        {% else %}
+                        <li class="disabled page-item">
+                            <a href="" class="page-link"><i class="fa fa-angle-right"></i></a>
+                            <br>
+                            <a href="{% url 'courseall' %}" class="btn btn-primary" style="color:white">Finish</a>
+                            <br><br>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <input type="submit" value="Save" class="btn btn-success">
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("{{exm_end}}").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML =   hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    window.location.href = "{% url 'student_home' %}"
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+
+
+
+
+
+
+</script>
+
+
+{% endblock  %}

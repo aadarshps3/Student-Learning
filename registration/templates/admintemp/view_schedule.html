@@ -1,0 +1,58 @@
+{% extends 'admintemp/base.html' %}
+
+{% block content %}
+
+<div class="container page__heading-container">
+    <div class="page__heading d-flex align-items-center justify-content-between">
+        <h1 class="m-0"> Exam Schedule</h1>
+    </div>
+</div>
+  {% for message in messages %}
+        <div class="alert alert-info" role="alert">
+            {{message}}
+        </div>
+        {% endfor %}
+<div class="card card-form" >
+    <div class="row no-gutters" >
+
+        <div class="col-lg-12 card-form__body">
+
+            <div class="table-responsive border-bottom" data-toggle="lists"
+                 data-lists-values="[&quot;js-lists-values-employee-name&quot;]">
+
+
+                <table class="table mb-0 thead-border-top-0">
+                    <thead>
+                    <tr>
+                                <th>SI No</th>
+
+                                <th>Exam Start </th>
+                                <th>Exam End </th>
+                                <th>Update</th>
+                                <th>Delete</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in schedule %}
+                            <tr>
+                                <td scope="row">{{forloop.counter}}</td>
+
+                                <td>{{i.exam_start}}</td>
+                                <td>{{i.exam_end}}</td>
+
+                                    <td><a href="{% url 'update_schedule' i.id %}" class="btn btn-primary">Update</a></td>
+                                <td><a href="{% url 'delete_schedule' i.id %}" class="btn btn-danger">Delete</a></td>
+
+
+                            </tr>
+                            {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

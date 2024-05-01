@@ -1,0 +1,40 @@
+{% extends 'registration/base.html' %}
+
+
+{% block content %}
+<b>{{name}}</b><br>
+<br>
+<br>
+<form method="POST">
+{% csrf_token %}
+<table align="center">
+
+
+	<tr><td><b>Username:</b></td><td><input type="text" name="username" placeholder="Username">
+						<span>{{form.errors.username}}</span></td></tr>
+	<tr><td><b>Firstname:</b></td><td><input type="text" name="first_name" placeholder="firstname">
+						<span>{{form.errors.first_name}}</span></td></tr>
+	<tr><td><b>Lastname:</b></td><td><input type="text" name="last_name" placeholder="lastname">
+						<span>{{form.errors.last_name}}</span></td></tr>
+	<tr><td><b>Email:</b></td><td><input type="email" name="email" placeholder="Email">
+						<span>{{form.errors.email}}</span></td></tr>
+	<tr><td><b>Address:</b></td><td><input type="text" name="address" placeholder="Address">
+						<span>{{form.errors.address}}</span></td></tr>
+    <tr><td><b>Roll No:</b></td><td><input type="text" name="rollno" placeholder="Roll no">
+						<span>{{form.errors.rollno}}</span></td></tr>
+	<tr><td><b>password:</b></td><td><input type="password" name="password1" placeholder="enter Password">
+						<span>{{form.errors.password1}}</span></td></tr>
+	<tr><td><b>confirm password:</b></td><td><input type="password" name="password2" placeholder="Re-enter Password">
+						<span>{{form.errors.password2}}</span></td></tr>
+
+</table>
+	<table align="center">
+	<tr><td><input type="submit" value="signup"></td></tr>
+	<tr><td><a href="{% url 'userview' %}"><input type="button" value="back"></a></td></tr>
+	</table>
+</form>
+
+
+
+
+{% endblock %}

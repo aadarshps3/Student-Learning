@@ -1,0 +1,17 @@
+{% extends 'student/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{request.user}}
+      <p class="text-muted">.online</p>
+        </h5>
+      <form method="post">
+          {% csrf_token %}
+    <p class="card-text">{{form|crispy}}</p>
+          <button type="submit" class="btn btn-primary">Send</button>
+          </form> <br><br>
+      <a class="btn btn-danger" href="{% url 'chat_view_gue' %}">View Chat</a>
+  </div>
+</div>
+{% endblock %}
