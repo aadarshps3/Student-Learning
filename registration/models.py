@@ -45,6 +45,12 @@ class ExamSchedule(models.Model):
 
 
 class Question(models.Model):
+    DIFFICULTY_CHOICES = [
+        ('E', 'Easy'),
+        ('M', 'Medium'),
+        ('H', 'Hard'),
+    ]
+
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
@@ -54,6 +60,7 @@ class Question(models.Model):
     option3 = models.CharField(max_length=50)
     option4 = models.CharField(max_length=50)
     answer = models.CharField(max_length=50)
+    difficulty = models.CharField(max_length=1, choices=DIFFICULTY_CHOICES,null=True,blank=True)
 
     def __str__(self):
         return self.question

@@ -35,6 +35,7 @@
                     <thead>
                     <tr>
                         <th >SI No</th>
+                        <th >Type</th>
                         <th class="absorbing-column">Question</th>
                         <th >Option1</th>
                         <th >Option2</th>
@@ -53,12 +54,13 @@
                        {% for qn in questions %}
                     <tr>
                         <td>{{ forloop.counter0|add:questions.start_index }}</td>
+                        <td>{{qn.difficulty}}</td>
                         <td>{{qn.question}}</td>
                         <td>{{qn.option1}}</td>
                         <td>{{qn.option2}}</td>
                         <td>{{qn.option3}}</td>
                         <td>{{qn.option4}}</td>
-                        <td>{{qn.answer}}</td>
+                        <td style="color:green">{{qn.answer}}</td>
                         <td><a href="{% url 'updateq' qn.id %}" class="btn btn-primary">Update</a></td>
                         <td>
                             <form action="{% url 'deleteq' qn.id %}" method="post"
